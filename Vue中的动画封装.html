@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+
+    <style>
+        .v-enter{
+            opacity: 0;
+        }
+        .v-enter-active{
+            /* 监听到opacity发生变化。让这个变化在1s内完成  */
+            transition: opacity 1s;
+        }
+        .v-leave-to{
+            opacity: 0;
+        }
+        .v-leave-active{
+            transition: opacity 1s;
+        }
+    </style>
+</head>
+<body>
+    <div id='root'>  
+        <fade :show="show">
+            <div>helloWorld</div>
+        </fade>
+        
+        <button @click='handleClick'>切换</button>
+    </div>
+    
+</body>
+
+<script>
+
+    Vue.component('fade' , {
+        props:['show'],
+        template:`  <transition @before-enter="handleBeforeEnter" @enter="handleEnter">
+                        <slot v-if='show'></slot> 
+                    </transition>`,
+        methods:{
+            handleBeforeEnter: function(el){
+                el.style.color='red'
+            },
+            handleEnter: function(el,done){
+                setTimeout(() => {
+                    el.style.color='green'
+                    done()
+                }, 2000);
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#root',
+        data:{
+            show:true
+        },
+        methods: {
+            handleClick: function(){
+                this.show=!this.show
+            }
+        },
+    })
+</script>
+</html>

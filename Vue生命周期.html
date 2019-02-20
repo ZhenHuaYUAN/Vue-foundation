@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       
+    </div>
+    
+</body>
+<script>
+
+    //生命周期函数就是Vue实例在某一个时间点会自动执行的函数
+    // Vue实例基础初始化后会自动调用beforeCreate函数，之后进行外部的注入以及双向绑定相关的内容的初始化，再之后进行created函数
+    var app = new Vue({
+        el:'#app',
+        template:'<div>{{test}}</div>',
+        data:{
+            test:'helloworld'
+        },
+        beforeCreate:function() {
+            console.log('beforeCreate')
+        },
+        created:function() {
+            console.log('created')
+        },
+        //页面渲染(挂载）之前
+        beforeMount:function() {
+            // console.log(this.$el)
+            console.log('beforMount')
+        },
+        // 页面挂载之后
+        mounted:function() {
+            // console.log(this.$el)
+            console.log('monted')
+        },
+        //组件销毁前
+        beforeDestroy:function() {
+            console.log("beforeDestroy")
+        },
+        //销毁后
+        destroyed:function() {
+            console.log("destroyed")
+        },
+        //数据改变前
+        beforeUpdate:function() {
+            console.log('beforeUpdate')
+        },
+        //数据改变后
+        updated:function() {
+            console.log('updated')
+        },
+
+    })
+</script>
+</html>

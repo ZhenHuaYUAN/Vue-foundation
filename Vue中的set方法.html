@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       <div v-for="(item,index) of num">{{item}}</div>
+       <button @click='handleClick'>添加</button>
+    </div>
+    
+</body>
+<script>
+   
+    var app = new Vue({
+        el: '#app',
+        data:{
+            userInfo: {
+                name: "Panda",
+                age : "22",
+                gender : 'male',
+                salary : 'secret'
+            },
+            num:[1,2,3,4]
+        },
+        methods: {
+            handleClick: function(){
+                // Vue.set(app.userInfo,'address','chengdu')
+                app.$set(app.userInfo,'address','chengdu')
+                //改变下标为1的值为5
+                // Vue.set(app.num,1,5)
+                app.$set(app.num,2,6)
+            }
+        },
+    })
+</script>
+</html>

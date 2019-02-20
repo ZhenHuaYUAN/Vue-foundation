@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <table>
+            <tbody>
+                <tr is='row'></tr>
+                <tr is='row'></tr>
+                <tr is='row'></tr>                
+            </tbody>
+        </table>
+
+    </div>
+    
+</body>
+<script>
+    //在非根组件（子组件里）定义data的时候，不能直接作为一个对象来定义，要求data必须是一个函数.因为一个子组件可能在不同的地方被调用很多次，
+    //每一个子组件的数据不希望和其他的子组件产生冲突，通过一个函数来返回一个对象的目的就是让每一个子组件都拥有一个独立的数据存储
+    Vue.component('row',{
+        data: function(){
+            return{
+                content : 'this is content'
+            }
+        },
+        template:'<tr><td>{{content}}</td></tr>'
+    })
+
+    var vm = new Vue({
+        el: '#root'
+    })
+</script>
+</html>

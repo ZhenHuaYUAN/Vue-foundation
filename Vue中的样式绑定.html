@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+    <style>
+        .activated{
+            color: red
+        }
+        .activated1{
+            font-size: 50px
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- :class div元素上有一个class，名字是activated，显不显示取决于isActivated这个变量 class的对象绑定-->
+        <!-- <div @click='handleDivClick'
+            :class="{activated:isActivated}"
+        >
+            hello world</div> -->
+
+        <div @click='handleDivClick' 
+        :class="[activated, activated1]">
+            hello world!
+        </div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        // data:{
+        //     isActivated:true
+        // },
+        data: {
+            activated:"",
+            activated1:"activated1"
+        },
+        methods: {
+            handleDivClick:function(){
+                // this.isActivated=!this.isActivated                 
+                this.activated = this.activated === 'activated' ? '' : 'activated'
+            }
+        },
+
+    })
+</script>
+</html>

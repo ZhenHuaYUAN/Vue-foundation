@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <!-- v-on:===@ -->
+        <div @click='handleClick'>{{message}}</div>
+        <item></item>
+    </div>
+    
+    <script>
+        Vue.component('item',{
+            template: '<div>hello world1</div>'
+        })
+
+        
+
+        var vm = new Vue({
+            //el定义Vue实例接管的dom的最外层标签
+            el:'#root',
+            
+            data:{
+                message:'helloWorld!'
+            },
+            methods: {
+                handleClick:function(){
+                    alert(123);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

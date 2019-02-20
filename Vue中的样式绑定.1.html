@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <div :style="styleObj" @click='handleDivClick'>
+            Hello World!
+        </div> -->
+
+        <div :style="[styleObj,{marginLeft: '20px'}]" @click='handleDivClick'>
+                Hello World!
+            </div>
+       
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+       data: {
+           styleObj: {
+               color: 'black',
+               fontSize:'40px'
+           }
+       },
+       methods: {
+           handleDivClick: function(){
+               this.styleObj.color = this.styleObj.color === 'black' ? "red" : "black";
+           }
+       },
+
+    })
+</script>
+</html>

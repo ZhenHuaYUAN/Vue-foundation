@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 在组件的事件上加一个.native就不是监听内部组件向外触发的自定义事件，而是原生的事件-->
+    <div id="root">
+       <child @click.native='handleClick'></child>
+    </div>
+</body>
+<script>
+
+    Vue.component('child',{
+        template:'<div>child</div>',
+       
+    })
+
+    var vm = new Vue({
+        el: '#root',
+        methods: {
+            handleClick: function(){
+                alert('click')
+            }
+        },
+        
+    })
+</script>
+</html>

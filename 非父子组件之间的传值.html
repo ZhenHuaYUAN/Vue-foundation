@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- Vue解决复杂的非父子组件传值问题：VueX或使用发布订阅模式（总线机制） -->
+   
+    <div id="root">
+       <child content='panda'></child>
+       <child content='Yuan'></child>
+    </div>
+</body>
+<script>
+    //每一个通过Vue创建的实例都会有bus这个属性，都指向同一个Vue的实例
+    Vue.prototype.bus=new Vue()
+
+    Vue.component('child',{
+        props:{
+            content:String
+        },
+        data:function(){
+            return {
+                selfContent:this.content
+            }
+        },
+        template:'<div @click="handleClick">{{selfContent}}</div>',
+        methods: {
+            handleClick: function(){
+                this.bus.$emit('change',this.selfContent)
+            }
+        },
+        //组件被挂载(渲染)时会执行的函数
+        mounted: function() {
+            var that = this
+            //$on监听bus上触发的事件
+            this.bus.$on('change',function(value){
+                that.selfContent=value
+            })
+        },
+    })
+
+    var vm = new Vue({
+        el: '#root',             
+    })
+</script>
+</html>

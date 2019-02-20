@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-model数据的双向绑定 -->
+        <input type="text" v-model="inputValue">
+        
+        <button v-on:click="handleBtnClick()">提交</button>
+        <ul>
+            <!-- <li v-for="item in list">{{item}}</li> -->
+            <!-- 通过list决定循环输出多少个todo-item组件，把每一个list项的内容通过v-bind的语法，借助content变量传给todoitem这个子组件 
+            @delete监听delete事件
+           v-bind:content 可以直接省略为:content -->
+            <todo-item 
+                        v-bind:content="item" 
+                        v-bind:index  ="index"
+                        v-for="(item, index) in list"
+                        @delete="handleItemDelete">
+            </todo-item>
+        </ul>
+    </div>
+</body>
+<script>
+    // 全剧组件
+    // Vue.component("TodoItem",{
+    //     // props从父组件接受什么内容
+    //     props: ['content'],
+    //     template:"<li>{{content}}</li>"
+    // })
+
+
+    //局部组件
+    var TodoItem = {
+        props: ['content','index'],
+        template:"<li @click='handleItemClick'>{{content}}</li>",
+        methods: {
+            handleItemClick: function(){
+                //$.emit向外触发delete事件,  把index作为参数带给父组件
+                this.$emit("delete",this.index)
+            }
+        }
+    }
+
+    var app = new Vue({
+        el: '#app',
+        // 将局部组件注册到Vue实例里
+        components: {
+            TodoItem: TodoItem
+        },
+        data : {
+            list: [],
+            inputValue: ''
+        },
+        methods :{
+            handleBtnClick: function(){
+                //this.会自动到data里找值
+                this.list.push(this.inputValue)
+                this.inputValue=''
+            },
+            handleItemDelete: function(index){
+                //splice从index位置开始删除1项
+                this.list.splice(index,1);
+            }
+        }
+    })
+</script>
+
+</html>

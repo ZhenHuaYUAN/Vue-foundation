@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+
+    <style>
+        .fade-enter{
+            opacity: 0;
+        }
+        .fade-enter-active{
+            /* 监听到opacity发生变化。让这个变化在1s内完成  */
+            transition: opacity 1s;
+        }
+        .fade-leave-to{
+            opacity: 0;
+        }
+        .fade-leave-active{
+            transition: opacity 2s;
+        }
+    </style>
+</head>
+<body>
+    <div id='root'>
+        <!-- 动画效果的标签 transition对应的过度动画原理：
+        当一个元素被transition包裹了之后，Vue会自动分析元素的Css样式，然后构建一个动画的流程，在动画即将被执行的一瞬间，会往内部的div上
+        增加两个Class名字。分别是fade-enter(leave)和fade-enter(leave)-active。当动画第一帧执行结束后，把fade-enter去掉，
+        增加一个fade-enter(leave)-to,执行到结束的一瞬间，会把fade-enter(leave)-active和fade-enter(leave)-to去掉 -->
+
+        <!-- 不给name时，为.v-enter等 -->
+        <transition name='fade'>
+            <div v-if='show'>helloWorld</div>
+        </transition>
+        
+        <button @click='handleClick'>切换</button>
+    </div>
+    
+</body>
+
+<script>
+    var vm = new Vue({
+        el: '#root',
+        data:{
+            show:true
+        },
+        methods: {
+            handleClick: function(){
+                this.show=!this.show
+            }
+        },
+    })
+</script>
+</html>

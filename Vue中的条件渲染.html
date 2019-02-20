@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <!-- v-show为false时内容已经被渲染到页面上，只是有display:none的样式，v-if对应的内容不会被渲染到页面上 经常需要改变dom是否显示时
+        用v-show性能高些-->
+        <!-- <div v-if='show'>{{message}}</div>
+        <div v-if="show === 'a'">this is a</div>
+        <div v-else-if="show === 'b'">this is b</div>
+        <div v-else-if="show === 'c'">this is c</div>
+        <div v-else>this is not a and b</div>
+        <div v-else>123</div> -->
+        <!-- <div v-show='show'>{{message}}</div> -->
+          
+        
+        <!-- 对元素标签加一个key值，Vue会知道它是页面上唯一的一个元素，如果两个东西的key值不一样，就不会去复用 -->
+        <div v-if='show'>用户名：<input key='username'/> </div>
+        <div v-else>邮箱：<input key='email'/> </div>
+    </div>
+    
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data:{
+            show:false
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 父组件通过属性的形式向子组件传递数据 -->
+    <div id="root">
+       <counter :count='0' @change='handleChange'></counter>
+       <counter :count='1' @change='handleChange'></counter>
+       <div>{{total}}</div>
+    </div>
+    
+</body>
+<script>
+
+    var counter = {
+        //子组件接受父组件传递的内容。在Vue中有个单向数据流的概念，也就是父组件可以向子组件传递参数，但是子组件不能修改父组件传过来的参数。
+        //一旦子组件接受的不是一个基础类型的数据，而是类似于Object的对象形式也就是引用形式的数据的时候，在子组件里改变了传递过来的数据里
+        //的一些内容，有可能接受的引用形的数据还被其他的子组件使用，改了数据后有可能对其他子组件产生影响
+        props:['count'],
+        data:function(){
+            return {
+                number: this.count
+            }
+        },
+        template : '<div @click="handleClick">{{number}}</div>',
+        methods:{
+            handleClick : function(){
+                this.number = this.number + 2
+                this.$emit('change',2,3)
+            }
+        }
+    }
+
+    var vm = new Vue({
+        el: '#root',
+        components:{
+            counter: counter
+        },
+        data:{
+            total:1
+        },
+        methods:{
+            handleChange: function(value,w){
+                this.total = this.total + value
+            }
+        }
+    })
+</script>
+</html>

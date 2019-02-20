@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+      <child content='1234444'></child>
+    </div>
+    
+</body>
+<script>
+
+    Vue.component('child',{
+        //props特性：当父组件使用子组件时候，通过属性向子组件传值的时候，恰好子组件里声明了对父组件传递过来的属性的接收。这种形式的属性就叫做props特性
+        //传递的属性不会再dom标签上显示，子组件可以直接通过差值表达式或者this.content获得内容
+
+        //非props特性：父组件向子组件传递了一个属性，但子组件并没有声明要接收这个属性 。在子组件里不能用，会显示在子组件最外层的dom标签的html属性中
+        props:{
+            //子组件接收到的content这个属性必须是String这个属性
+            content: {
+                type: String,
+                required:true, //content这个属性必须传
+                default:'defaultValue',
+                validator: function(value){
+                    return value.length>5
+                }
+            }
+        },
+        template:'<div>{{content}}</div>'
+    })
+   
+
+    var vm = new Vue({
+        el: '#root',
+        
+    })
+</script>
+</html>

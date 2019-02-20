@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{content}}
+    </div>
+</body>
+
+<script>
+    // var dom = document.getElementById('app');
+    // dom.innerHTML = 'hello world';
+    // setTimeout(function(){
+    //     dom.innerHTML = 'Bye world';
+    // }, 2000);
+    //让这个vue实例去接管id=app的标签的div里的所有内容  el限制了一个Vue实例接管的处理的dom的范围  书写VueJs代码时不用关注dom的操作，
+    // 主要关注数据的操作
+    var app = new Vue({
+        el : '#app',
+        data : {
+            content: 'hello worl1d'
+        } 
+    })
+
+    setTimeout(() => {
+        app.$data.content = 'Bye world'
+    }, 2000);
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 每一个循环项上带一个key值，提高性能 key值唯一且不使用index作为key值时性能最优 -->
+        <!-- <div v-for="(item, index) of list" 
+            :key="item.id">{{item.text}}----{{index}}</div> -->
+    
+    <!-- templagte模板占位符 -->
+    <template v-for="(item, index) of list" :key="item.id">
+        <div>{{item.text}}----{{index}}</div>
+        <span>{{item.text}}</span>
+    </template>
+    </div>
+    
+</body>
+<script>
+    //Vue中提供的操作数组的变异方法：
+    // push pop shift(删除数组第一项) unshift(往数组的第一项加内容) splice(截取) sort(排序) reverse(对数组取反)
+    //app.list.splice(1,1,{id:3213,text:'123'}) 从下标为1的项开始删除1条，并在它的位置加入一条
+    var app = new Vue({
+        el: '#app',
+        data:{
+            list:[
+                {
+                    id:'1323',
+                    text:'hello'
+                },{
+                    id:'2134',
+                    text:'panda'
+                },{
+                    id:"214512",
+                    text:'sama'
+                }
+            ]
+        }
+    })
+</script>
+</html>

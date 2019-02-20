@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 在Vue中通过ref这中引用的形式来获取到dom的操作 -->
+    <div id="root">
+        <!-- <div  ref="hello" @click='handleClick' >HelloWorld</div> -->
+        <counter @change="handleChange" ref="one"></counter>
+        <counter @change="handleChange" ref="two"></counter>
+        <div>{{total}}</div>
+    </div>
+    
+</body>
+<script>
+
+    Vue.component('counter',{
+        template:'<div @click="handleClick">{{number}}</div>',
+        data : function(){
+            return {
+                number : 0
+            }
+        },
+        methods:{
+            handleClick: function(){
+                this.number ++
+                //子组件向父组件传值，触发一个事件
+                this.$emit('change')
+            }
+        }
+    })
+
+    var vm = new Vue({
+        el: '#root',
+        data:{
+            total: 0
+        },
+        methods: {
+            // handleClick : function(){
+            //     //this.$refs指整个Vue实例里所有的引用
+            //     console.log(this.$refs.hello.innerHTML)
+            // }
+            handleChange : function(){
+                console.log(this.$refs.one.number)
+                this.total = this.$refs.one.number + this.$refs.two.number
+            }
+        },
+
+    })
+</script>
+</html>
