@@ -33,7 +33,7 @@
 </body>
 
 <script>
-
+    //封装动画组件
     Vue.component('fade' , {
         props:['show'],
         template:`  <transition @before-enter="handleBeforeEnter" @enter="handleEnter">
@@ -51,6 +51,9 @@
             }
         }
     })
+
+
+
     var vm = new Vue({
         el: '#root',
         data:{
