@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用过滤器 -->
+    {{date | formatDates}}
+    
+  </div>
+</body>
+<script>
+  var padDate = function(value) {
+    return value<10? '0' + value : value
+  }
+  var app = new Vue({
+    el:'#app',
+    data: {
+      date: new Date()
+    },
+    mounted() {
+      var _this = this
+      this.timer = setInterval(function(){
+        _this.data = new Date()
+      },10)
+    },
+    beforeDestroy() {
+      if(this.timer) {
+        clearInterval(this.timer)
+      }
+    },
+    // 过滤器 用于处理简单的文本转换。如果要实现更复杂的数据变换应该使用计算属性
+    filters: {
+      formatDates: function(value) {
+        var date = new Date(value)
+        var year = date.getFullYear()
+        var month = padDate(date.getMonth() + 1)
+        var day = padDate(date.getDate())
+        var hours = padDate(date.getHours())
+        var minutes = padDate(date.getMinutes())
+        var seconds = padDate(date.getSeconds())
+        return year + '-' + month + '-' + day + '  ' + hours + ':' + minutes + ':' +seconds
+       }
+    }
+
+  })
+</script>
+</html>
